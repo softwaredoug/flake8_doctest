@@ -20,11 +20,27 @@ from flake8 import mccabe
 pep8style = None
 
 
+def runDocTests(path):
+    absPath = os.path.abspath(path)
+    relPath = os.path.relpath(absPath)
+    import unittest
+    import doctest
+    from flake8.parseDocTest import parseDocTestResult
+    res = unittest.TestResult()
+    suite = doctest.DocFileSuite(path, module_relative=False)
+    suite.run(res)
+    for failure in res.failures:
+        for decodedFailureLine in parseDocTestResult(failure[1]):
+            print "%s:%i:1: Failed Doctest" % (relPath, decodedFailureLine)
+    return len(res.failures) + len(res.errors)
+
+
 def check_file(path, complexity=-1):
     warnings = pyflakes.checkPath(path)
     warnings += pep8style.input_file(path)
     if complexity > -1:
         warnings += mccabe.get_module_complexity(path, complexity)
+    warnings += runDocTests(path)
     return warnings
 
 
