@@ -30,13 +30,13 @@ from flake8 import __version__
 README = open('README').read()
 
 setup(
-    name="flake8",
+    name="flake8 w/doctests",
     license="MIT",
     version=__version__,
-    description="code checking using pep8 and pyflakes",
-    author="Tarek Ziade",
-    author_email="tarek@ziade.org",
-    url="http://bitbucket.org/tarek/flake8",
+    description="Fork of flake8 that adds running of doctest",
+    author="Doug Turnbull",
+    author_email="softwaredoug@gmail.com",
+    url="http://github.com/softwaredoug/flake8_doctests",
     packages=["flake8", "flake8.tests"],
     scripts=scripts,
     long_description=README,
