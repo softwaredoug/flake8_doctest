@@ -3,16 +3,16 @@
 
 def foo(text):
     """ Print text
-    >>> foo("bar")
-    "bar"
-    >>> foo("cat")
-    "cat"
+    >>> foo('bar')
+    'bar'
+    >>> foo('cat')
+    'cat'
     """
     print "fail"
 
 def passes(text):
     """ Print text
-    >>> passes("foo")
+    >>> passes('foo')
     'foo'
     """
     return text
