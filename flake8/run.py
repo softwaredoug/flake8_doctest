@@ -16,23 +16,9 @@ from flake8.util import skip_file
 from flake8 import pep8
 from flake8 import pyflakes
 from flake8 import mccabe
+from flake8.runDocTest import runDocTests
 
 pep8style = None
-
-
-def runDocTests(path):
-    absPath = os.path.abspath(path)
-    relPath = os.path.relpath(absPath)
-    import unittest
-    import doctest
-    from flake8.parseDocTest import parseDocTestResult
-    res = unittest.TestResult()
-    suite = doctest.DocFileSuite(path, module_relative=False)
-    suite.run(res)
-    for failure in res.failures:
-        for decodedFailureLine in parseDocTestResult(failure[1]):
-            print "%s:%i:1: Failed Doctest" % (relPath, decodedFailureLine)
-    return len(res.failures) + len(res.errors)
 
 
 def check_file(path, complexity=-1):
