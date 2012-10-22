@@ -1,5 +1,8 @@
 def parseFailDetails(failDetails):
-    """ Parse the line number of the doctest failure"""
+    """ Parse the line number of the doctest failure
+    >>> parseFailDetails("blah")
+    -1
+    """
     import re
     failDetails = failDetails.split(',')
     lineNo = -1
@@ -19,3 +22,7 @@ def parseDocTestResult(docTestResStr):
         if failure != -1:
             failDetails = lines[lineNo - 1]
             yield parseFailDetails(failDetails)
+
+if __name__ == "__main__":
+    from doctest import testmod
+    testmod()
